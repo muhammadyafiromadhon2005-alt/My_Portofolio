@@ -1,0 +1,661 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yafi | Cybersecurity Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body{
+      background:#050816;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    ::selection{
+      background:#00f0ff;
+      color:black;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar{
+      width:8px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#00f0ff;
+      border-radius:20px;
+    }
+
+    /* NAVBAR */
+    nav{
+      width:100%;
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:999;
+      backdrop-filter: blur(12px);
+      background:rgba(0,0,0,0.3);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-container{
+      max-width:1200px;
+      margin:auto;
+      padding:20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo{
+      font-size:1.5rem;
+      font-weight:700;
+      color:#00f0ff;
+      letter-spacing:1px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+    }
+
+    .nav-links a{
+      color:white;
+      text-decoration:none;
+      transition:0.3s;
+      font-weight:500;
+    }
+
+    .nav-links a:hover{
+      color:#00f0ff;
+    }
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:'';
+      position:absolute;
+      width:600px;
+      height:600px;
+      background:#00f0ff;
+      filter:blur(180px);
+      opacity:0.15;
+      border-radius:50%;
+      top:-100px;
+      right:-100px;
+    }
+
+    .hero-content{
+      text-align:center;
+      z-index:2;
+      padding:20px;
+    }
+
+    .hero-content h1{
+      font-size:5rem;
+      margin-bottom:15px;
+      background:linear-gradient(to right,#00f0ff,#00ff99);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero-content h2{
+      font-size:2rem;
+      color:#cfcfcf;
+      margin-bottom:20px;
+    }
+
+    .hero-content p{
+      max-width:700px;
+      margin:auto;
+      line-height:1.8;
+      color:#a0a0a0;
+      margin-bottom:35px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:15px 35px;
+      border-radius:50px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+      text-decoration:none;
+    }
+
+    .btn-primary{
+      background:#00f0ff;
+      color:black;
+      box-shadow:0 0 20px #00f0ff;
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-5px);
+      box-shadow:0 0 40px #00f0ff;
+    }
+
+    .btn-secondary{
+      border:1px solid #00f0ff;
+      color:#00f0ff;
+      background:transparent;
+    }
+
+    .btn-secondary:hover{
+      background:#00f0ff;
+      color:black;
+    }
+
+    /* SECTION */
+    section{
+      padding:120px 20px;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:70px;
+    }
+
+    .section-title h2{
+      font-size:3rem;
+      margin-bottom:15px;
+      color:#00f0ff;
+    }
+
+    .section-title p{
+      color:#9e9e9e;
+    }
+
+    /* ABOUT */
+    .about-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:40px;
+      align-items:center;
+    }
+
+    .about-card{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      padding:40px;
+      border-radius:25px;
+      backdrop-filter:blur(10px);
+      transition:0.4s;
+    }
+
+    .about-card:hover{
+      transform:translateY(-10px);
+      border-color:#00f0ff;
+    }
+
+    .about-card h3{
+      margin-bottom:20px;
+      color:#00f0ff;
+      font-size:2rem;
+    }
+
+    .about-card p{
+      color:#bdbdbd;
+      line-height:1.9;
+    }
+
+    /* SKILLS */
+    .skills{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:25px;
+    }
+
+    .skill-box{
+      background:rgba(255,255,255,0.05);
+      border-radius:20px;
+      padding:30px;
+      text-align:center;
+      transition:0.3s;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .skill-box:hover{
+      transform:translateY(-10px);
+      border-color:#00f0ff;
+      box-shadow:0 0 25px rgba(0,240,255,0.3);
+    }
+
+    .skill-box h3{
+      margin-top:15px;
+    }
+
+    .skill-icon{
+      font-size:3rem;
+    }
+
+    /* PROJECTS */
+    .projects{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:30px;
+    }
+
+    .project-card{
+      background:rgba(255,255,255,0.05);
+      border-radius:25px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.08);
+      transition:0.4s;
+    }
+
+    .project-card:hover{
+      transform:translateY(-12px);
+      border-color:#00f0ff;
+    }
+
+    .project-image{
+      height:220px;
+      background:linear-gradient(135deg,#00f0ff,#0066ff);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:3rem;
+      font-weight:bold;
+    }
+
+    .project-content{
+      padding:30px;
+    }
+
+    .project-content h3{
+      margin-bottom:15px;
+      color:#00f0ff;
+    }
+
+    .project-content p{
+      color:#bdbdbd;
+      line-height:1.7;
+      margin-bottom:20px;
+    }
+
+    .project-content a{
+      color:#00f0ff;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    /* CONTACT */
+    .contact-box{
+      max-width:800px;
+      margin:auto;
+      background:rgba(255,255,255,0.05);
+      padding:50px;
+      border-radius:30px;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .contact-form{
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea{
+      background:#0c1022;
+      border:none;
+      outline:none;
+      padding:18px;
+      border-radius:15px;
+      color:white;
+      font-size:1rem;
+    }
+
+    .contact-form textarea{
+      min-height:150px;
+      resize:none;
+    }
+
+    .contact-form button{
+      background:#00f0ff;
+      color:black;
+      border:none;
+      padding:16px;
+      border-radius:15px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .contact-form button:hover{
+      box-shadow:0 0 25px #00f0ff;
+    }
+
+    footer{
+      text-align:center;
+      padding:30px;
+      color:#8f8f8f;
+      border-top:1px solid rgba(255,255,255,0.08);
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+
+      .hero-content h1{
+        font-size:3rem;
+      }
+
+      .hero-content h2{
+        font-size:1.4rem;
+      }
+
+      .about-grid{
+        grid-template-columns:1fr;
+      }
+
+      .nav-links{
+        display:none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">YAFI.DEV</div>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="hero-content">
+      <h1>Cybersecurity & Developer</h1>
+
+      <h2>Professional Portfolio Website</h2>
+
+      <p>
+        Saya adalah developer dan cybersecurity enthusiast
+        yang fokus membangun website modern, software profesional,
+        UI/UX futuristik, dan sistem keamanan digital.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">
+          View Projects
+        </a>
+
+        <a href="#contact" class="btn btn-secondary">
+          Contact Me
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>About Me</h2>
+        <p>Professional Developer & Security Researcher</p>
+      </div>
+
+      <div class="about-grid">
+
+        <div class="about-card">
+          <h3>Who Am I?</h3>
+
+          <p>
+            Saya membangun website profesional, software desktop,
+            UI/UX modern, dan project berbasis teknologi terbaru.
+            Fokus utama saya adalah performa, keamanan,
+            dan tampilan futuristik.
+          </p>
+        </div>
+
+        <div class="about-card">
+          <h3>Experience</h3>
+
+          <p>
+            Memiliki pengalaman membuat project HTML/CSS/JS,
+            React, aplikasi Linux, software keuangan,
+            marketplace, dan berbagai sistem modern
+            dengan desain premium.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Skills</h2>
+        <p>Technology Stack</p>
+      </div>
+
+      <div class="skills">
+
+        <div class="skill-box">
+          <div class="skill-icon">💻</div>
+          <h3>HTML5</h3>
+        </div>
+
+        <div class="skill-box">
+          <div class="skill-icon">🎨</div>
+          <h3>CSS3</h3>
+        </div>
+
+        <div class="skill-box">
+          <div class="skill-icon">⚡</div>
+          <h3>JavaScript</h3>
+        </div>
+
+        <div class="skill-box">
+          <div class="skill-icon">🛡️</div>
+          <h3>Cybersecurity</h3>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PROJECT -->
+  <section id="projects">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Projects</h2>
+        <p>Latest Professional Works</p>
+      </div>
+
+      <div class="projects">
+
+        <div class="project-card">
+
+          <div class="project-image">
+            WEB
+          </div>
+
+          <div class="project-content">
+            <h3>Marketplace Website</h3>
+
+            <p>
+              Website marketplace modern dengan desain premium,
+              responsive, dan performa tinggi.
+            </p>
+
+            <a href="#">View Project →</a>
+          </div>
+
+        </div>
+
+        <div class="project-card">
+
+          <div class="project-image">
+            APP
+          </div>
+
+          <div class="project-content">
+            <h3>Finance Software</h3>
+
+            <p>
+              Software keuangan profesional offline
+              untuk bisnis dan personal.
+            </p>
+
+            <a href="#">View Project →</a>
+          </div>
+
+        </div>
+
+        <div class="project-card">
+
+          <div class="project-image">
+            SEC
+          </div>
+
+          <div class="project-content">
+            <h3>Cybersecurity Tools</h3>
+
+            <p>
+              Tool dan automation security untuk monitoring,
+              testing, dan keamanan sistem.
+            </p>
+
+            <a href="#">View Project →</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Contact</h2>
+        <p>Let's Build Something Great</p>
+      </div>
+
+      <div class="contact-box">
+
+        <form class="contact-form">
+
+          <input type="text" placeholder="Your Name">
+
+          <input type="email" placeholder="Your Email">
+
+          <textarea placeholder="Your Message"></textarea>
+
+          <button type="submit">
+            Send Message
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 Yafi Portfolio. All Rights Reserved.
+  </footer>
+
+  <script>
+    // ANIMATION ON SCROLL
+    const cards = document.querySelectorAll(
+      '.skill-box, .project-card, .about-card'
+    );
+
+    window.addEventListener('scroll', () => {
+
+      cards.forEach(card => {
+
+        const cardTop = card.getBoundingClientRect().top;
+
+        if(cardTop < window.innerHeight - 100){
+          card.style.opacity = "1";
+          card.style.transform = "translateY(0)";
+        }
+
+      });
+
+    });
+
+    cards.forEach(card => {
+      card.style.opacity = "0";
+      card.style.transform = "translateY(50px)";
+      card.style.transition = "0.8s";
+    });
+
+    // CONTACT FORM
+    document.querySelector('.contact-form')
+      .addEventListener('submit', function(e){
+
+      e.preventDefault();
+
+      alert("Pesan berhasil dikirim!");
+    });
+
+  </script>
+
+</body>
+</html>
